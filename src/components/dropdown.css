@@ -1,0 +1,35 @@
+.menuContainer {
+    background-color: #2e2e2e;
+    padding: 10px;
+    border-radius: 8px;
+    width: 200px;
+  }
+  
+  .menuItem {
+    color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .menuItem:hover {
+    background-color: #3e3e3e;
+  }
+  
+  .subMenu {
+    background-color: #3e3e3e;
+    margin-top: 5px;
+    border-radius: 8px;
+  }
+  
+  .subMenuItem {
+    color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .subMenuItem:hover {
+    background-color: #4e4e4e;
+  }
+  
