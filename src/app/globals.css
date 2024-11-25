@@ -39,8 +39,18 @@ body {
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 237.3px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Animation for smooth transition */
+  cursor: pointer;
 }
 
+.Card:hover {
+  transform: translateY(-10px); /* Move card up on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+.Card:active {
+  transform: translateY(-5px); /* Move card slightly up on click */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+} /* Slightly reduce shadow on click */
 .ProductInfo {
   text-align: left;
 }
@@ -66,6 +76,7 @@ body {
 }
 
 .AppContainer {
+  display: flex;
   max-width: 1280 px;
   margin: 0 5.6% 0 5.6%;
   font-family: Arial, sans-serif;

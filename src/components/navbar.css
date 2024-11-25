@@ -1,68 +1,389 @@
 .navbar {
-    background-color:inherit;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    width: inherit;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 2% 0 2%;
+  background-color: inherit;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  width: inherit;
+  height: 80px !important;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2% 0 2%;
+  border-bottom: 1px #2e2e2e solid;
+}
+
+.logo {
+  flex: 1;
+}
+
+.logo img {
+  width: 100px; /* Adjust the width as needed */
+}
+
+.search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+
+
+.search input {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  padding: 5px;
+}
+
+.search select {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  padding: 5px;
+}
+
+.search button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.actions button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.actions i {
+  margin-right: 5px;
+}
+
+.dropdown-container {
+  position: relative; /* Make the container relative to position dropdown */
+}
+
+/* Wrapper for the overlapping search bar */
+.overlapping-search-bar-container {
+  width:  577px; /* Adjust width as needed */
+  height: 80px; /* Height of the container */
+  position: relative;
+  display: flex;
+  justify-items: auto;
+  align-items: normal;
+  background-color: transparent; /* Dark background */
+  border-radius: 50px; /* Fully rounded */
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+/* Shared input field styles */
+.search-bar-input {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: inherit; /* Height of the container */
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  background-color: #2e2e2e; /* Slightly darker than the container */
+  color: white;
+  transition: all 0.3s ease;
+  margin-top:  0 !important;
+}
+
+/* Styling for the first input */
+.search-1 {
+  z-index: 2; /* Place above the second input */
+  left: 0; /* Align to the left */
+  align-self: start;
+  width: 50%;
+}
+
+/* Styling for the second input */
+.search-2 {
+  z-index: 1; /* Place beneath the first input */
+  left: 35%; /* Offset slightly to the right */
+  width: 70%;
+  background-color: #3e3e3e; /* Different background for contrast */
+}
+
+/* Placeholder text color */
+.search-bar-input::placeholder {
+  color: #aaaaaa; /* Light gray placeholder */
+}
+
+/* Search Button */
+.search-bar-button {
+  position: absolute;
+  right: 10px; /* Align to the far right */
+  top: 20%;
+  width: 40px;
+  height: 40px;
+  background-color: #d32f2f; /* Red background */
+  border: none;
+  outline: none;
+  border-radius: 50%; /* Circular button */
+  display: flex;
+  /* align-items: flex-start; */
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 5; /* Ensure it's on top of the inputs */
+}
+
+.icon{
+  align-self: auto;
+}
+
+/* Button hover effect */
+.search-bar-button:hover {
+  background-color: #b71c1c !important; /* Darker red */
+}
+
+/* Highlight effect when inputs are focused */
+.search-bar-input:focus {
+  z-index: 2;
+  background-color: #4e4e4e; /* Lighter background on focus */
+  box-shadow: 0 0 10px #ff5722; /* Soft orange glow on focus */
+}
+.search-1 :focus {
+  z-index: 2;
+}
+ .search-2 :focus{
+  z-index: 2;
+  background-color: #3e3e3e;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .overlapping-search-bar-container {
+    width: 100%; /* Full width on smaller screens */
   }
-  
-  .logo {
-    flex: 1;
+
+  .search-bar-input {
+    width: 60%; /* Adjust input width for smaller screens */
   }
-  
-  .logo img {
-    width: 100px; /* Adjust the width as needed */
+
+  .search-2 {
+    left: 15%; /* Adjust overlap for smaller screens */
   }
-  
-  .search {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    background-color: #333;
-    border-radius: 15px;
-    padding: 5px;
-  }
-  
-  .search input {
-    flex: 1;
-    border: none;
-    background-color: transparent;
-    color: #fff;
-    padding: 5px;
-  }
-  
-  .search select {
-    border: none;
-    background-color: transparent;
-    color: #fff;
-    padding: 5px;
-  }
-  
-  .search button {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .actions {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .actions button {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .actions i {
-    margin-right: 5px;
-  }
+}
+
+
+
+.filter-button {
+  padding: 10px 20px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #b71c1c;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Popup Container */
+.popup-container {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+/* Popup Header */
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.popup-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Price Range Section */
+.price-range {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-slider {
+  width: 100%;
+  margin: 0 5px;
+}
+
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.price-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-input span {
+  font-size: 14px;
+  color: #aaaaaa;
+  margin-bottom: 5px;
+}
+
+.price-input input {
+  background-color: #2e2e2e;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  width: 80px;
+}
+
+/* Platforms Section */
+.platforms {
+  margin-bottom: 20px;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.platform-item {
+  background-color: #2e2e2e;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.platform-item:hover {
+  background-color: #3e3e3e;
+}
+
+/* Popup Footer */
+.popup-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-button {
+  background: none;
+  border: none;
+  color: #aaaaaa;
+  cursor: pointer;
+}
+
+.apply-button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  background-color: #b71c1c;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  background-color: #1a1a1a; /* Dark background */
+  border: 2px solid white; /* White border */
+  border-radius: 50%; /* Make it circular */
+  transform: rotate(90deg); /* Rotate 90 degrees */
+}
+
+.icon-container svg {
+  transform: rotate(180deg); /* Ensure the SVG rotates with the container */
+}
+
+.user-icon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%; /* Adjust size as needed */
+  height: 50px;
+  background-color: #1a1a1a; /* Dark background */
+  border: 2px solid white; /* White border */
+  border-radius: 50px; /* Make it circular */
+}
+
+.cart-icon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  background-color: #1a1a1a; /* Dark background */
+  border: 2px solid white; /* White border */
+  border-radius: 50%; /* Make it circular */
+}

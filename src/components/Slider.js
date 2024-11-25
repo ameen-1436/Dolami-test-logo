@@ -1,57 +1,89 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from "react";
 import "./navbar.css"
 
-function RangeSlider() {
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(100);
+const FilterPopup = ({isOpen, togglePopup}) => {
+    // const [isOpen, setIsOpen] = useState(false);
 
-  const minSliderRef = useRef(null);
-  const maxSliderRef = useRef(null);
-
-  const handleSliderDrag = (e, sliderRef, setValue) => {
-    const slider = sliderRef.current;
-    const sliderWidth = slider.offsetWidth;
-    const sliderPosition = e.clientX - slider.offsetLeft;
-    const percentage = (sliderPosition / sliderWidth) * 100;
-    const value = Math.round(percentage / 100 * 100);
-    setValue(value);
-  };
-
-  useEffect(() => {
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMinSliderDrag);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    const handleMinSliderDrag = (e) => {
-      handleSliderDrag(e, minSliderRef, setMinValue);
-    };
-
-    minSliderRef.current.addEventListener('mousedown', (e) => {
-      document.addEventListener('mousemove', handleMinSliderDrag);
-      document.addEventListener('mouseup', handleMouseUp);
-    });
-
-    maxSliderRef.current.addEventListener('mouseup', (e) => {
-        document.addEventListener('mousemove', handleMinSliderDrag);
-        document.addEventListener('mousedown', handleMouseUp);
-      });
-  }, []);
+    // // Toggle the popup
+    // const togglePopup = () => {
+    //   setIsOpen(!isOpen);
+    // };
 
   return (
-    <div className="slider-container">
-      <label>Price range</label>
-      <div className="slider">
-        <div className="slider-track"></div>
-        <div className="slider-thumb" ref={minSliderRef} />
-        <div className="slider-thumb" ref={maxSliderRef} />
-      </div>
-      <div className="price-range">
-        <div className="min-price">$ {minValue.toFixed(2)}</div>
-        <div className="max-price">$ {maxValue.toFixed(2)}</div>
-      </div>
+    <div className="filter-popup">
+      {/* Filter Popup */}
+      {isOpen && (
+        <div className="popup-overlay" onClick={togglePopup}>
+          <div
+            className="popup-container"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+          >
+            {/* Popup Header */}
+            <div className="popup-header">
+              <span className="popup-title">Filters</span>
+              <button className="close-button" onClick={togglePopup}>
+                &times;
+              </button>
+            </div>
+
+            {/* Popup Body */}
+            <div className="popup-body">
+              {/* Price Range */}
+              <div className="price-range">
+                <label className="section-title">Price range</label>
+                <div className="slider-container">
+                  <input type="range" className="price-slider" />
+                  <input type="range" className="price-slider" />
+                </div>
+                <div className="price-inputs">
+                  <div className="price-input">
+                    <span>Minimum</span>
+                    <input type="text" placeholder="$ 000.00" />
+                  </div>
+                  <div className="price-input">
+                    <span>Maximum</span>
+                    <input type="text" placeholder="$ 000.00" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Platforms */}
+              <div className="platforms">
+                <label className="section-title">Platforms</label>
+                <div className="platform-grid">
+                  {[
+                    "VRChat (Quest)",
+                    "VRChat (PCVR)",
+                    "Spatial",
+                    "ChilloutVR",
+                    "Resonite",
+                    "Neos VR",
+                    "Cluster",
+                    "Virtual Cast",
+                    "Others",
+                  ].map((platform, index) => (
+                    <div className="platform-item" key={index}>
+                      {platform}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Popup Footer */}
+            <div className="popup-footer">
+              <button className="clear-button" onClick={() => console.log("Clear all")}>
+                Clear all
+              </button>
+              <button className="apply-button" onClick={() => console.log("Apply filters")}>
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default RangeSlider;
+export default FilterPopup;

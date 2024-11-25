@@ -1,38 +1,106 @@
-// components/DropdownMenu.js
-import { useState } from 'react';
-import "./dropdown.css"
+import React, { useState } from "react";
+import "./dropdown.css";
 
-const DropdownMenu = ({isVisible}) => {
-  const [activeMenu, setActiveMenu] = useState(null);
+const CategoriesPopup = ({ isPopupVisible, toggleCatPopup }) => {
+  const [activeMenu, setActiveMenu] = useState("All");
 
-  const handleMenuClick = (menu) => {
-    setActiveMenu(menu === activeMenu ? null : menu);
+  const MENU_DATA = [
+    {
+      name: "Avatars",
+      submenu: [
+        "Human-like",
+        "Anthro & Furry",
+        "Robot & Cyborgs",
+        "Others",
+        "All in Avatars",
+      ],
+    },
+    {
+      name: "Fashion",
+      submenu: ["Clothes", "Accessories", "Others", "All in Fashion"],
+    },
+    {
+      name: "All",
+      submenu:[],
+    },
+  ];
+
+  const handleMenuMouseEnter = (menuName, submenu) => {
+    if (submenu?.length > 0) setActiveMenu(menuName);
   };
 
-if (!isVisible) return null
+  const handleMouseLeave = () => {
+    setActiveMenu(null);
+  };
+  const handleSubmenuClick = (item) => {
+    alert(`You clicked on ${item}`);
+    toggleCatPopup(false); // Close popup after click
+  };
 
   return (
-    <div className={'menuContainer'}>
-      <div className={'menuItem'} onClick={() => handleMenuClick('avatars')}>
-        Avatars
-        {activeMenu === 'avatars' && (
-          <div className={'subMenu'}>
-            <button className={'subMenuItem'}>Human-like</button>
-            <button className={'subMenuItem'}>Anthro & Furry</button>
-            <button className={'subMenuItem'}>Robot & Cyborgs</button>
-            <button className={'subMenuItem'}>Others</button>
-            <button className={'subMenuItem'}>All in Avatars</button>
+    <>
+      {isPopupVisible && (
+        <>
+          <div className="popup-menu">
+            {/* Main Menu */}
+            <div
+              className="main-menu"
+              onMouseLeave={handleMouseLeave} // Hide submenu if cursor leaves the main menu area
+            >
+              {MENU_DATA.map((menu) => (
+                <span
+                  key={menu.name}
+                  onMouseEnter={() =>
+                    handleMenuMouseEnter(menu?.name, menu?.submenu)
+                  }
+                >
+                  {menu?.name}{" "}
+                  <span className="arrow">
+                    {menu?.name != "All" && (
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9 5L16 12L9 19"
+                          stroke="#111827"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                </span>
+              ))}
+            </div>
+
+            {/* Dividing Line */}
+            <div className={`divider ${activeMenu ? "visible" : ""}`}></div>
+
+            {/* Submenu */}
+            <div
+              className="submenu"
+              onMouseEnter={() => setActiveMenu(activeMenu)} // Keep submenu active when hovering over it
+              onMouseLeave={handleMouseLeave} // Hide submenu when cursor leaves
+            >
+              {MENU_DATA.filter((menu) => menu.name === activeMenu).map(
+                (menu) =>
+                  menu.submenu.map((item) => (
+                    <span key={item} onClick={() => handleSubmenuClick(item)}>
+                      {item}
+                    </span>
+                  ))
+              )}
+            </div>
           </div>
-        )}
-      </div>
-      <div className={'menuItem'} onClick={() => handleMenuClick('fashion')}>
-        Fashion
-      </div>
-      <div className={'menuItem'} onClick={() => handleMenuClick('all')}>
-        All
-      </div>
-    </div>
+        </>
+      )}
+    </>
   );
 };
 
-export default DropdownMenu;
+export default CategoriesPopup;

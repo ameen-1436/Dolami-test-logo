@@ -1,35 +1,93 @@
-.menuContainer {
-    background-color: #2e2e2e;
-    padding: 10px;
-    border-radius: 8px;
-    width: 200px;
-  }
-  
-  .menuItem {
-    color: #ffffff;
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .menuItem:hover {
-    background-color: #3e3e3e;
-  }
-  
-  .subMenu {
-    background-color: #3e3e3e;
-    margin-top: 5px;
-    border-radius: 8px;
-  }
-  
-  .subMenuItem {
-    color: #ffffff;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .subMenuItem:hover {
-    background-color: #4e4e4e;
-  }
-  
+/* Popup menu container */
+.popup-menu {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  background-color: #2c2c2c;
+  color: #d1d1d1;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 412px;
+  height: 312px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Main Menu (Left Column) */
+.main-menu {
+  width: 50%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-menu span {
+  font-size: 16px;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: all 0.3s ease-in-out;
+  border-radius: 30px; /* Rounded corners for button effect */
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.main-menu span:hover {
+  background-color: #444; /* Highlight background color */
+  color: #fff; /* Highlight text color */
+}
+
+/* Arrow on the left */
+.main-menu span .arrow {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin-left: 55%;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.main-menu span:hover .arrow {
+  transform: translateX(5px); /* Slide arrow slightly on hover */
+  color: #fff !important; /* Highlight arrow color */
+}
+
+/* Dividing Line */
+.divider {
+  width: 1px;
+  background-color: #444;
+  visibility: hidden; /* Hidden by default */
+  transition: visibility 0.3s, opacity 0.3s;
+  opacity: 0; /* Transparent by default */
+}
+
+.divider.visible {
+  visibility: visible; /* Visible on hover */
+  opacity: 1; /* Fully opaque */
+}
+
+/* Submenu (Right Column) */
+.submenu {
+  width: 50%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu span {
+  font-size: 14px;
+  color: #b3b3b3;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 30px; /* Rounded corners for button effect */
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.submenu span:hover {
+  background-color: #444; /* Highlight background color */
+  color: #fff; /* Highlight text color */
+}

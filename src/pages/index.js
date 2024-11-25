@@ -2,11 +2,36 @@ import React, { useState } from "react";
 import ProductGrid from "../components/ProductGrid";
 import Navbar from "../components/Navbar";
 import "./../app/globals.css";
+import DropdownMenu from "../components/CategoryDropdown";
 
 const App = () => {
   const pass = "fedev2024test";
   const [inputValue, setInputValue] = useState("");
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [activeMenu, setActiveMenu] = useState("");
+  const [selectedSubMenu, setSelectedSubMenu] = useState("");
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+    if (!isDropdownVisible) setActiveMenu("");
+  };
+
+  const handleMenuClick = (menu) => {
+    setActiveMenu(activeMenu === menu ? "" : menu);
+    setSelectedSubMenu("");
+    console.log("Menu clicked:", menu);
+  };
+
+  const handleSubMenuClick = (subMenu) => {
+    setSelectedSubMenu(subMenu);
+    console.log("Submenu clicked:", subMenu);
+  };
+
+  const handleCategory = () =>{
+    
+  }
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -33,8 +58,14 @@ const App = () => {
           </div>
         </div>
       )}
-      <Navbar />
+      <Navbar toggleDropdown={toggleDropdown} />
       <div className="AppContainer">
+      <DropdownMenu
+        isVisible={isDropdownVisible}
+        activeMenu={activeMenu}
+        onMenuClick={handleMenuClick}
+        onSubMenuClick={handleSubMenuClick}
+      />
         <div className="Main">
           <div className="Breadcrumb">Pardent category &gt; Child category</div>
           <ProductGrid />
