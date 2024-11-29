@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { isMobile } from "react-device-detect";
+import { useDispatch } from "react-redux";
+import { setMainCat, setSubCat } from "../store/categorySlice";
 import "./dropdown.css";
 
-const CategoriesPopup = ({ isPopupVisible, toggleCatPopup }) => {
+const CategoriesPopup = ({
+  isPopupVisible,
+  toggleCatPopup,
+  openSubMenu,
+  goBack,
+  activeSubmenu,
+}) => {
   const [activeMenu, setActiveMenu] = useState("All");
+  const [menuItemSelectec, setMenuItemSelected] = useState("");
+  const [device, setDevice] = useState("");
+  useEffect(() => {
+    if (isMobile) setDevice(true);
+  }, []);
 
+  const dispatch = useDispatch();
   const MENU_DATA = [
     {
       name: "Avatars",
@@ -21,81 +36,121 @@ const CategoriesPopup = ({ isPopupVisible, toggleCatPopup }) => {
     },
     {
       name: "All",
-      submenu:[],
     },
   ];
 
   const handleMenuMouseEnter = (menuName, submenu) => {
-    if (submenu?.length > 0) setActiveMenu(menuName);
+    if (submenu?.length > 0) {
+      setActiveMenu(menuName);
+    }
   };
 
   const handleMouseLeave = () => {
     setActiveMenu(null);
   };
+
   const handleSubmenuClick = (item) => {
-    alert(`You clicked on ${item}`);
-    toggleCatPopup(false); // Close popup after click
+    setMenuItemSelected(item);
+    dispatch(setMainCat(activeMenu));
+    dispatch(setSubCat({ item }));
+    toggleCatPopup(false);
   };
 
   return (
     <>
       {isPopupVisible && (
         <>
-          <div className="popup-menu">
+          <div className={!device ? "popup-menu" : "popup-menu-mobile"}>
             {/* Main Menu */}
             <div
-              className="main-menu"
-              onMouseLeave={handleMouseLeave} // Hide submenu if cursor leaves the main menu area
+              className={!device ? "main-menu" : "menu-list"}
+              onMouseLeave={handleMouseLeave}
             >
-              {MENU_DATA.map((menu) => (
-                <span
-                  key={menu.name}
-                  onMouseEnter={() =>
-                    handleMenuMouseEnter(menu?.name, menu?.submenu)
-                  }
-                >
-                  {menu?.name}{" "}
-                  <span className="arrow">
-                    {menu?.name != "All" && (
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+              {activeSubmenu === null &&
+                MENU_DATA.map((menu) => (
+                  <>
+                    {activeSubmenu === null && (
+                      <span
+                        key={menu.name}
+                        className={device ? "menu-item" : "menu-nonmobile"}
+                        onMouseEnter={() =>
+                          handleMenuMouseEnter(menu?.name, menu?.submenu)
+                        }
+                        onClick={() => openSubMenu(menu?.submenu, menu?.name)}
                       >
-                        <path
-                          d="M9 5L16 12L9 19"
-                          stroke="#111827"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
+                        {menu?.name}{" "}
+                        <span className="arrow-mobile">
+                          {menu?.name != "All" && (
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M9 5L16 12L9 19"
+                                stroke="white"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          )}
+                        </span>
+                      </span>
                     )}
-                  </span>
-                </span>
-              ))}
+                  </>
+                ))}
             </div>
 
             {/* Dividing Line */}
-            <div className={`divider ${activeMenu ? "visible" : ""}`}></div>
+            {!device && (
+              <div className={`divider ${activeMenu ? "visible" : ""}`}></div>
+            )}
 
             {/* Submenu */}
-            <div
-              className="submenu"
-              onMouseEnter={() => setActiveMenu(activeMenu)} // Keep submenu active when hovering over it
-              onMouseLeave={handleMouseLeave} // Hide submenu when cursor leaves
-            >
-              {MENU_DATA.filter((menu) => menu.name === activeMenu).map(
-                (menu) =>
-                  menu.submenu.map((item) => (
-                    <span key={item} onClick={() => handleSubmenuClick(item)}>
-                      {item}
-                    </span>
-                  ))
-              )}
-            </div>
+            {
+              <div
+                className={!device ? "submenu" : ""}
+                onMouseEnter={() => setActiveMenu(activeMenu)} // Keep submenu active when hovering over it
+                onMouseLeave={handleMouseLeave} // Hide submenu when cursor leaves
+              >
+                {device && activeSubmenu !== null && (
+                  <span className="menu-header" onClick={goBack}>
+                    {activeMenu !== "All" && <div>{activeMenu}</div>}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 5L16 12L9 19"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>{" "}
+                  </span>
+                )}
+                {((device && activeSubmenu) || (!device && activeMenu)) &&
+                  MENU_DATA.filter((menu) => menu?.name === activeMenu).map(
+                    (menu) =>
+                      menu?.submenu?.map((item) => (
+                        <span
+                          key={item}
+                          className={device ? "menu-item" : ""}
+                          onClick={() => handleSubmenuClick(item)}
+                        >
+                          {item}
+                        </span>
+                      ))
+                  )}
+              </div>
+            }
           </div>
         </>
       )}

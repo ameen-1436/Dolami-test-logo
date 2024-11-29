@@ -1,37 +1,18 @@
 import React, { useState } from "react";
+import { store } from "../store/store";
 import ProductGrid from "../components/ProductGrid";
 import Navbar from "../components/Navbar";
 import "./../app/globals.css";
 import DropdownMenu from "../components/CategoryDropdown";
+import { Provider, useSelector } from "react-redux";
 
 const App = () => {
   const pass = "fedev2024test";
   const [inputValue, setInputValue] = useState("");
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [activeMenu, setActiveMenu] = useState("");
-  const [selectedSubMenu, setSelectedSubMenu] = useState("");
+  const [activeMenu, setActiveMenu] = useState("All");
+  const [menuItemSelectec, setMenuItemSelected] = useState("");
 
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-    if (!isDropdownVisible) setActiveMenu("");
-  };
-
-  const handleMenuClick = (menu) => {
-    setActiveMenu(activeMenu === menu ? "" : menu);
-    setSelectedSubMenu("");
-    console.log("Menu clicked:", menu);
-  };
-
-  const handleSubMenuClick = (subMenu) => {
-    setSelectedSubMenu(subMenu);
-    console.log("Submenu clicked:", subMenu);
-  };
-
-  const handleCategory = () =>{
-    
-  }
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -43,7 +24,7 @@ const App = () => {
     }
   };
   return (
-    <>
+    <Provider store={store}>
       {isOverlayVisible && (
         <div className={"overlay"}>
           <div className={"modal"}>
@@ -58,20 +39,13 @@ const App = () => {
           </div>
         </div>
       )}
-      <Navbar toggleDropdown={toggleDropdown} />
+      <Navbar />
       <div className="AppContainer">
-      <DropdownMenu
-        isVisible={isDropdownVisible}
-        activeMenu={activeMenu}
-        onMenuClick={handleMenuClick}
-        onSubMenuClick={handleSubMenuClick}
-      />
         <div className="Main">
-          <div className="Breadcrumb">Pardent category &gt; Child category</div>
           <ProductGrid />
         </div>
       </div>
-    </>
+    </Provider>
   );
 };
 
