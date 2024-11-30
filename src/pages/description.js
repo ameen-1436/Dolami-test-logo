@@ -31,11 +31,11 @@ const handleImageClick = (image) => {
         </div>
         <div className="varitiesHolder" >
           {detailImages.map((image) => (
-            <div key={image} className="varitiesCards" onClick={() => handleImageClick(image)}> {image}</div>
+            <div key={image} className="varitiesCards" style={{color:"white"}} onClick={() => handleImageClick(image)}> {image}</div>
           ))}
         </div>
-        <div>Produt Name<div>Brief description of product, a one liner.</div></div>
-        <div>ratings</div>
+        <div style={{color:"white"}}>Produt Name<div  style={{color:"white"}}>Brief description of product, a one liner.</div></div>
+        <div style={{color:"white"}} >ratings</div>
         <div></div>
         <div></div>
       </div>
