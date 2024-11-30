@@ -31,7 +31,7 @@ const handleImageClick = (image) => {
         </div>
         <div className="varitiesHolder" >
           {detailImages.map((image) => (
-            <div className="varitiesCards" onClick={() => handleImageClick(image)}> {image}</div>
+            <div key={image} className="varitiesCards" onClick={() => handleImageClick(image)}> {image}</div>
           ))}
         </div>
         <div>Produt Name<div>Brief description of product, a one liner.</div></div>
