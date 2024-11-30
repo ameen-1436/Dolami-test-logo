@@ -4,8 +4,9 @@ import CategoriesPopup from "./CategoryDropdown";
 import { isMobile } from "react-device-detect";
 import "./navbar.css";
 import FilterPopup from "./Slider";
-import { setMainCat, setSubCat } from "../store/categorySlice";
+import { setMainCat, setSubCat, setUserMenu } from "../store/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
+import UserMenu from "./UserMenu";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,9 +16,14 @@ function Navbar() {
 
   const dispatch = useDispatch();
   const slectedCategory = useSelector((state) => state?.category);
+  
   useEffect(() => {
     if (isMobile) setDevice(true);
   }, []);
+
+  const handleUserMenu = () => {
+    if (device) dispatch(setUserMenu(!slectedCategory?.isUserMenuVisible))
+  }
 
   const toggleCatPopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -147,7 +153,7 @@ function Navbar() {
           </>
         )}
         <div className="user-icon" style={{ marginLeft: "5%" }}>
-          <div style={{ marginLeft: device ? "8px" : "" }}>
+          <div style={{ marginLeft: device ? "8px" : "" }} onClick={handleUserMenu}>
             <svg
               width="24"
               height="24"
@@ -185,6 +191,7 @@ function Navbar() {
             )}
           </div>
         </div>
+        <UserMenu />
         {!device && (
           <div className="cart-icon" style={{ marginLeft: "5%" }}>
             <svg

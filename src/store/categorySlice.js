@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mainCat: "All",
   subCat: null,
+  isUserMenuVisible: false,
 };
 
 const dolamiSlice = createSlice({
@@ -20,8 +21,11 @@ const dolamiSlice = createSlice({
       state.mainCat = "All";
       state.subCat = null;
     },
+    setUserMenu(state, action) {
+      state.isUserMenuVisible = !state.isUserMenuVisible
+    }
   },
 });
 
-export const { setMainCat, setSubCat, clearCategory } = dolamiSlice.actions;
+export const { setMainCat, setSubCat, clearCategory, setUserMenu } = dolamiSlice.actions;
 export default dolamiSlice.reducer;
