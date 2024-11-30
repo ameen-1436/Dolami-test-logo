@@ -1,0 +1,38 @@
+/* Popup menu container */
+.lang-menu {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    background-color: #2c2c2c;
+    color: #d1d1d1;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 412px;
+    height: 312px;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  /* Main Menu (Left Column) */
+  .mainlang-menu {
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mainlang-menu span {
+    font-size: 16px;
+    padding: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    border-radius: 30px; /* Rounded corners for button effect */
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  
+

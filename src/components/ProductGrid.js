@@ -1,133 +1,12 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard";
 
-const products = [
-  {
-    category: "Avatars",
-    subcategory: "Human-like",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Anthro & Furry",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Robot & Cyborgs",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Fashion",
-    subcategory: "Clothes",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Fashion",
-    subcategory: "Accessories",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Human-like",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Anthro & Furry",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Robot & Cyborgs",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Fashion",
-    subcategory: "Clothes",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Fashion",
-    subcategory: "Accessories",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Human-like",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Anthro & Furry",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Avatars",
-    subcategory: "Robot & Cyborgs",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Fashion",
-    subcategory: "Clothes",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-  {
-    category: "Fashion",
-    subcategory: "Accessories",
-    productName: "Product name",
-    creatorName: "Creator name",
-    rating: 5.0,
-    price: 10.0,
-  },
-];
-
-const ProductGrid = () => {
+const ProductGrid = ({ products, handleCardClick }) => {
+  const router = useRouter();
   const catState = useSelector((state) => state?.category);
-  const handleCardClick = (product) => {};
+
   let filteredProducts = [];
   if (catState?.mainCat === "All") {
     filteredProducts = products;
@@ -149,7 +28,8 @@ const ProductGrid = () => {
           <ProductCard
             key={index}
             {...product}
-            onClick={() => handleCardClick(product)}
+            handleCardClick={handleCardClick}
+            product={product}
           />
         ))}
       </div>

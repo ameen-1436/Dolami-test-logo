@@ -4,6 +4,7 @@ const initialState = {
   mainCat: "All",
   subCat: null,
   isUserMenuVisible: false,
+  langPopup: false,
 };
 
 const dolamiSlice = createSlice({
@@ -23,9 +24,12 @@ const dolamiSlice = createSlice({
     },
     setUserMenu(state, action) {
       state.isUserMenuVisible = !state.isUserMenuVisible
-    }
+    },
+    setLangPopup(state, action) {
+      state.langPopup = !state.langPopup;
+    },
   },
 });
 
-export const { setMainCat, setSubCat, clearCategory, setUserMenu } = dolamiSlice.actions;
+export const { setMainCat, setSubCat, clearCategory, setUserMenu, setLangPopup } = dolamiSlice.actions;
 export default dolamiSlice.reducer;

@@ -4,9 +4,15 @@ import CategoriesPopup from "./CategoryDropdown";
 import { isMobile } from "react-device-detect";
 import "./navbar.css";
 import FilterPopup from "./Slider";
-import { setMainCat, setSubCat, setUserMenu } from "../store/categorySlice";
+import {
+  setMainCat,
+  setSubCat,
+  setUserMenu,
+  setLangPopup,
+} from "../store/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import UserMenu from "./UserMenu";
+import LanguageSelector from "./LanguagePopup";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,14 +22,17 @@ function Navbar() {
 
   const dispatch = useDispatch();
   const slectedCategory = useSelector((state) => state?.category);
-  
+
+  const toggleLangPopup = () => {
+    dispatch(setLangPopup(!slectedCategory?.langPopup));
+  };
   useEffect(() => {
     if (isMobile) setDevice(true);
   }, []);
 
   const handleUserMenu = () => {
-    if (device) dispatch(setUserMenu(!slectedCategory?.isUserMenuVisible))
-  }
+    if (device) dispatch(setUserMenu(!slectedCategory?.isUserMenuVisible));
+  };
 
   const toggleCatPopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -53,6 +62,7 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
   return (
+    <>
     <nav className={"navbar"}>
       {!device && (
         <div className={"logo"}>
@@ -100,40 +110,15 @@ function Navbar() {
         goBack={goBack}
         openSubMenu={openSubMenu}
       />
-      {!device && (
-        <>
-          {" "}
-          <div
-            className="icon-container"
-            style={{ marginLeft: "2%" }}
-            onClick={togglePopup}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="black"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 6V4M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M6 18C7.10457 18 8 17.1046 8 16C8 14.8954 7.10457 14 6 14M6 18C4.89543 18 4 17.1046 4 16C4 14.8954 4.89543 14 6 14M6 18V20M6 14V4M12 10V20M18 18C19.1046 18 20 17.1046 20 16C20 14.8954 19.1046 14 18 14M18 18C16.8954 18 16 17.1046 16 16C16 14.8954 16.8954 14 18 14M18 18V20M18 14V4"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <FilterPopup isOpen={isOpen} togglePopup={togglePopup} />
-        </>
-      )}
+      <CategoriesPopup />
+      
       <div className={"actions"}>
         {!device && (
           <>
             <div style={{ marginLeft: "5%", width: "50%" }}>
               List Your Creation
             </div>
-            <div className="">
+            <div className="" onClick={toggleLangPopup}>
               <svg
                 width="24"
                 height="24"
@@ -153,7 +138,10 @@ function Navbar() {
           </>
         )}
         <div className="user-icon" style={{ marginLeft: "5%" }}>
-          <div style={{ marginLeft: device ? "8px" : "" }} onClick={handleUserMenu}>
+          <div
+            style={{ marginLeft: device ? "8px" : "" }}
+            onClick={handleUserMenu}
+          >
             <svg
               width="24"
               height="24"
@@ -211,8 +199,10 @@ function Navbar() {
             </svg>
           </div>
         )}
+        
       </div>
     </nav>
+    </>
   );
 }
 

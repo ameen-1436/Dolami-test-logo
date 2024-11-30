@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ProductCard = ({ category, subcategory, productName, creatorName, rating, price }) => (
-  <div className='Card'>
+const ProductCard = ({ category, subcategory, productName, creatorName, rating, price, product, handleCardClick }) => (
+  <div className='Card' onClick={() => handleCardClick(product)}>
     <div className='ImagePlaceholder'>{`${category} > ${subcategory}`}</div>
     <div className='ProductInfo'>
       <div className='ProductName'>{productName}</div>
