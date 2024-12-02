@@ -125,7 +125,7 @@
 /* Placeholder text color */
 .search-bar-input::placeholder {
   color: #aaaaaa;
-
+}
 /* Search Button */
 .search-bar-button {
   position: absolute;
@@ -171,7 +171,7 @@
 @media (max-width: 768px) {
   .overlapping-search-bar-container {
     width: 100%; 
-
+  }
   .search-bar-input {
     width: 100%; 
   }
