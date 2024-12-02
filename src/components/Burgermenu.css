@@ -16,7 +16,7 @@
 }
 
 .usermenu-header {
-    margin-top: 5%;
+  margin-top: 5%;
   display: flex;
   flex-direction: row;
   font-size: 20px;
@@ -68,11 +68,11 @@
 /* Mobile-specific styles */
 @media (min-width: 768px) {
   .burger-button {
-    display: none; /* Hide the burger button on larger screens */
+    display: none;
   }
 
   .userside-menu {
-    display: none; /* Ensure the side menu is hidden on larger screens */
+    display: none;
   }
 
   .top-bar {
@@ -86,10 +86,10 @@
   }
 
   .burger-button {
-    display: block; /* Show burger button only for small screens */
+    display: block;
   }
 
   .userside-menu {
-    display: flex; /* Side menu is shown only when toggled */
+    display: flex;
   }
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useDispatch } from "react-redux";
@@ -67,11 +69,11 @@ const CategoriesPopup = ({
               onMouseLeave={handleMouseLeave}
             >
               {activeSubmenu === null &&
-                MENU_DATA.map((menu) => (
+                MENU_DATA.map((menu, index) => (
                   <>
                     {activeSubmenu === null && (
                       <span
-                        key={menu.name}
+                        key={`main-menu-${menu.name}-${index}`}
                         className={device ? "menu-item" : "menu-nonmobile"}
                         onMouseEnter={() =>
                           handleMenuMouseEnter(menu?.name, menu?.submenu)
@@ -138,10 +140,10 @@ const CategoriesPopup = ({
                 )}
                 {((device && activeSubmenu) || (!device && activeMenu)) &&
                   MENU_DATA.filter((menu) => menu?.name === activeMenu).map(
-                    (menu) =>
-                      menu?.submenu?.map((item) => (
+                    (menu, index) =>
+                      menu?.submenu?.map((item, subIndex) => (
                         <span
-                          key={item}
+                          key={`submenu-${menu.name}-${item}-${index}-${subIndex}`}
                           className={device ? "menu-item" : ""}
                           onClick={() => handleSubmenuClick(item)}
                         >

@@ -30,14 +30,14 @@
   display: flex;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  border-radius: 30px; /* Rounded corners for button effect */
+  border-radius: 30px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
 .main-menu span:hover {
-  background-color: #444; /* Highlight background color */
-  color: #fff; /* Highlight text color */
+  background-color: #444;
+  color: #fff;
 }
 
 /* Arrow on the left */
@@ -49,22 +49,22 @@
 }
 
 .main-menu span:hover .arrow {
-  transform: translateX(5px); /* Slide arrow slightly on hover */
-  color: #fff !important; /* Highlight arrow color */
+  transform: translateX(5px);
+  color: #fff !important;
 }
 
 /* Dividing Line */
 .divider {
   width: 1px;
   background-color: #444;
-  visibility: hidden; /* Hidden by default */
+  visibility: hidden;
   transition: visibility 0.3s, opacity 0.3s;
-  opacity: 0; /* Transparent by default */
+  opacity: 0;
 }
 
 .divider.visible {
-  visibility: visible; /* Visible on hover */
-  opacity: 1; /* Fully opaque */
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Submenu (Right Column) */
@@ -81,14 +81,14 @@
   padding: 8px 10px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  border-radius: 30px; /* Rounded corners for button effect */
+  border-radius: 30px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
 .submenu span:hover {
-  background-color: #444; /* Highlight background color */
-  color: #fff; /* Highlight text color */
+  background-color: #444;
+  color: #fff;
 }
 
 /* Popup Menu for Mobile */

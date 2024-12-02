@@ -6,9 +6,49 @@ import Navbar from "../components/Navbar";
 import "./../app/globals.css";
 import DropdownMenu from "../components/CategoryDropdown";
 import { Provider, useSelector } from "react-redux";
-
+import RootLayout from "../app/layout";
 
 const products = [
+  {
+    category: "Avatars",
+    subcategory: "Human-like",
+    productName: "Product name",
+    creatorName: "Creator name",
+    rating: 5.0,
+    price: 10.0,
+  },
+  {
+    category: "Avatars",
+    subcategory: "Anthro & Furry",
+    productName: "Product name",
+    creatorName: "Creator name",
+    rating: 5.0,
+    price: 10.0,
+  },
+  {
+    category: "Avatars",
+    subcategory: "Robot & Cyborgs",
+    productName: "Product name",
+    creatorName: "Creator name",
+    rating: 5.0,
+    price: 10.0,
+  },
+  {
+    category: "Fashion",
+    subcategory: "Clothes",
+    productName: "Product name",
+    creatorName: "Creator name",
+    rating: 5.0,
+    price: 10.0,
+  },
+  {
+    category: "Fashion",
+    subcategory: "Accessories",
+    productName: "Product name",
+    creatorName: "Creator name",
+    rating: 5.0,
+    price: 10.0,
+  },
   {
     category: "Avatars",
     subcategory: "Human-like",
@@ -136,7 +176,6 @@ const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
-  
 
   useEffect(() => {
     // Check sessionStorage for authentication status
@@ -165,7 +204,7 @@ const App = () => {
 
   const handleCardClick = (product) => {
     router.push({
-      pathname:"/description",
+      pathname: "/description",
       query: {
         id: product.category,
         name: product.subcategory,
@@ -182,30 +221,35 @@ const App = () => {
       alert("Please enter the correct password.");
     }
   };
-  if(isOverlayVisible){
-    return(
+  if (isOverlayVisible) {
+    return (
       <div className={"overlay"}>
-          <div className={"modal"}>
-            <h2 style={{color: "black"}}>Please Enter the password</h2>
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleChange}
-              placeholder="Enter Password Here"
-            />
-            <button onClick={handleSubmit}>Submit</button>
-          </div>
+        <div className={"modal"}>
+          <h2 style={{ color: "black" }}>Please Enter the password</h2>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            placeholder="Enter Password Here"
+          />
+          <button onClick={handleSubmit}>Submit</button>
         </div>
-    )
+      </div>
+    );
   }
   return (
     <Provider store={store}>
-      <Navbar />
-      <div className="AppContainer">
-        <div className="Main">
-          <ProductGrid products={products} handleCardClick={handleCardClick}/>
+      <RootLayout>
+        {/* <Navbar /> */}
+        <div className="AppContainer">
+          <div className="Main">
+            <ProductGrid
+              products={products}
+              handleCardClick={handleCardClick}
+            />
+          </div>
         </div>
-      </div>
+      </RootLayout>
     </Provider>
   );
 };

@@ -11,9 +11,12 @@ const ProductGrid = ({ products, handleCardClick }) => {
   if (catState?.mainCat === "All") {
     filteredProducts = products;
   } else {
-    filteredProducts = products.filter(
-      (product) => product?.subcategory === catState?.subCat
-    );
+    filteredProducts = products.filter((product) => {
+      if (catState?.subCat === "All in Avatars" || catState?.subCat === "All in Fashion") {
+        return product?.category === catState?.mainCat;
+      }
+      return product?.subcategory === catState?.subCat;
+    });
   }
 
   return (
